@@ -6,7 +6,7 @@
     function Converter() {}
 
     Converter.prototype.convert = function(arabic) {
-      var i, numeral, ref;
+      var i, j, numeral, ref, ref1;
       if (arabic < 4) {
         numeral = '';
         for (i = 1, ref = arabic; 1 <= ref ? i <= ref : i >= ref; 1 <= ref ? i++ : i--) {
@@ -15,8 +15,18 @@
         return numeral;
       } else if (arabic === 4) {
         return 'IV';
-      } else {
+      } else if (arabic === 5) {
         return 'V';
+      } else if (arabic === 9) {
+        return 'IX';
+      } else if (arabic === 10) {
+        return 'X';
+      } else {
+        numeral = 'V';
+        for (j = 6, ref1 = arabic; 6 <= ref1 ? j <= ref1 : j >= ref1; 6 <= ref1 ? j++ : j--) {
+          numeral += 'I';
+        }
+        return numeral;
       }
     };
 
@@ -42,8 +52,20 @@
     it('returns "IV" when given 4', function() {
       return expect(converter.convert(4)).toEqual('IV');
     });
-    return it('returns "V" when given 5', function() {
+    it('returns "V" when given 5', function() {
       return expect(converter.convert(5)).toEqual('V');
+    });
+    it('returns "VI" when given 6', function() {
+      return expect(converter.convert(6)).toEqual('VI');
+    });
+    it('returns "VIII" when given 8', function() {
+      return expect(converter.convert(8)).toEqual('VIII');
+    });
+    it('returns "IX" when given 9', function() {
+      return expect(converter.convert(9)).toEqual('IX');
+    });
+    return it('returns "X" when given 10', function() {
+      return expect(converter.convert(10)).toEqual('X');
     });
   });
 
